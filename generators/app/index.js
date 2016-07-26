@@ -7,6 +7,10 @@ var yeoman = require('yeoman-generator'),
     path = require('path'),
     gutil = require('gulp-util');
 
+// 业务逻辑变量
+var devDir = 'UI_dev',
+    qmuiDir = devDir + '/qmui_web';
+
 module.exports = yeoman.Base.extend({
   prompting: function () {
     // 欢迎提示语
@@ -41,13 +45,19 @@ module.exports = yeoman.Base.extend({
           name: 'mainStyleFile',
           message: '项目主样式表文件名',
           default: this.mainStyleFile
-        }
+        },
+        {
+          type: 'confirm',
+          name: 'openIncludeFunction',
+          message: '是否开启模板引擎（增强静态模板 include，条件判断，传参等能力）?'
+        },
     ];
 
     return this.prompt(prompts).then(function (props) {
       this.projectName = props.projectName;
       this.prefix = props.prefix;
       this.mainStyleFile = props.mainStyleFile;
+      this.openIncludeFunction = props.openIncludeFunction;
 
     }.bind(this));
   },
@@ -57,22 +67,23 @@ module.exports = yeoman.Base.extend({
     mkdirp('UI_html');
     mkdirp('UI_html_result');
     mkdirp('public');
-    mkdirp('UI_dev');
+    mkdirp(devDir);
     gutil.log(gutil.colors.green('QMUI Install: ') + '安装最新版本的 QMUI Web');
-    this.spawnCommandSync('git', ['clone', 'git@github.com:QMUI/qmui_web.git', 'UI_dev/qmui_web']);
-    this.fs.copy(this.destinationPath('UI_dev/qmui_web/config.json'), this.destinationPath('UI_dev/config.json'));
-    this.fs.copy(this.destinationPath('UI_dev/qmui_web/config.rb'), this.destinationPath('UI_dev/config.rb'));
+    this.spawnCommandSync('git', ['clone', 'git@github.com:QMUI/qmui_web.git', qmuiDir]);
+    this.fs.copy(this.destinationPath(qmuiDir + '/config.json'), this.destinationPath(devDir + '/config.json'));
+    this.fs.copy(this.destinationPath(qmuiDir + '/config.rb'), this.destinationPath(devDir + '/config.rb'));
   },
 
   install: function () {
     // QMUI 配置表
-    this.qmuiConfig = this.destinationPath('UI_dev/config.json');
+    this.qmuiConfig = this.destinationPath(devDir + '/config.json');
 
     // readFile 内 this 被改变，这里需要先把配置数据复制一份
     var qmuiConfig = this.qmuiConfig, 
         projectName = this.projectName,
         prefix = this.prefix,
-        mainStyleFile = this.mainStyleFile;
+        mainStyleFile = this.mainStyleFile,
+        openIncludeFunction = this.openIncludeFunction;
 
     // 读取配置文件
     fs.readFile(qmuiConfig, function(error, data) {
@@ -83,22 +94,23 @@ module.exports = yeoman.Base.extend({
       result.project = projectName;
       result.prefix = prefix;
       result.resultCssFileName= mainStyleFile;
+      result.openIncludeFunction = openIncludeFunction;
       
       // 把配置表中的值修改为用户输入后重新写入文件
-      fs.writeFileSync(qmuiConfig, JSON.stringify(result), 'utf8');
+      fs.writeFileSync(qmuiConfig, JSON.stringify(result, null, '\t'), 'utf8');
     });
 
     // 安装 QMUI Web 依赖包 
-    var qmuiWebDir = process.cwd() + '/UI_dev/qmui_web';
+    var qmuiWebDir = process.cwd() + '/' + qmuiDir;
     process.chdir(qmuiWebDir);
 
-    gutil.log(gutil.colors.green('QMUI Install: ') + '安装 QMUI Web 依赖包，该过程耗时较长，同时请确保 npm 可用，如安装失败，可自行到 UI_dev/qmui_web 中执行 npm install');
+    gutil.log(gutil.colors.green('QMUI Install: ') + '安装 QMUI Web 依赖包，该过程耗时较长，同时请确保 npm 可用，如安装失败，可自行到 ' + qmuiDir + ' 中执行 npm install');
     this.installDependencies({
       skipInstall: this.options['skip-install'],
       bower: false,
       npm: true,
       callback: function() {
-        this.spawnCommand('gulp', ['createProject']);
+        this.spawnCommand('gulp', ['init']);
       }.bind(this)
     });
   }
