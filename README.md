@@ -1,5 +1,9 @@
-# generator-qmui [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-qmui [![NPM version][npm-image]][npm-url]
 > A Yeoman generator for QMUI Web
+
+[![Dependency Status][daviddm-image]][daviddm-url]
+[![QMUI Team Name](https://img.shields.io/badge/Team-QMUI-brightgreen.svg?style=flat)](https://github.com/QMUI "QMUI Team") 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT "Feel free to contribute.") 
 
 ## Installation
 
@@ -10,11 +14,15 @@ npm install -g yo
 npm install -g generator-qmui
 ```
 
-Then generate your new project:
+Then generate your new project on your target directory:
 
 ```bash
 yo qmui
 ```
+
+## Preview
+
+<img src="https://raw.githubusercontent.com/QMUI/qmuidemo_web/master/public/style/images/independent/Generator.gif" width="628" height="442" alt="效果预览" />
 
 ## License
 
