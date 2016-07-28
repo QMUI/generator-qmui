@@ -69,7 +69,7 @@ module.exports = yeoman.Base.extend({
     mkdirp('public');
     mkdirp(devDir);
     gutil.log(gutil.colors.green('QMUI Install: ') + '安装最新版本的 QMUI Web');
-    this.spawnCommandSync('git', ['clone', 'git@github.com:QMUI/qmui_web.git', qmuiDir]);
+    this.spawnCommandSync('git', ['clone', 'https://github.com/QMUI/qmui_web.git', qmuiDir]);
     this.fs.copy(this.destinationPath(qmuiDir + '/config.json'), this.destinationPath(devDir + '/config.json'));
     this.fs.copy(this.destinationPath(qmuiDir + '/config.rb'), this.destinationPath(devDir + '/config.rb'));
   },
