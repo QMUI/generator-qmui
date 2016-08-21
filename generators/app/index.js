@@ -70,13 +70,13 @@ module.exports = yeoman.Base.extend({
     mkdirp(devDir);
     gutil.log(gutil.colors.green('QMUI Install: ') + '安装最新版本的 QMUI Web');
     this.spawnCommandSync('git', ['clone', 'https://github.com/QMUI/qmui_web.git', qmuiDir]);
-    this.fs.copy(this.destinationPath(qmuiDir + '/config.json'), this.destinationPath(devDir + '/config.json'));
+    this.fs.copy(this.destinationPath(qmuiDir + '/config.js'), this.destinationPath(devDir + '/config.js'));
     this.fs.copy(this.destinationPath(qmuiDir + '/config.rb'), this.destinationPath(devDir + '/config.rb'));
   },
 
   install: function () {
     // QMUI 配置表
-    this.qmuiConfig = this.destinationPath(devDir + '/config.json');
+    this.qmuiConfig = this.destinationPath(devDir + '/config.js');
 
     // readFile 内 this 被改变，这里需要先把配置数据复制一份
     var qmuiConfig = this.qmuiConfig, 
@@ -97,7 +97,7 @@ module.exports = yeoman.Base.extend({
       result.openIncludeFunction = openIncludeFunction;
       
       // 把配置表中的值修改为用户输入后重新写入文件
-      fs.writeFileSync(qmuiConfig, JSON.stringify(result, null, '\t'), 'utf8');
+      fs.writeFileSync(qmuiConfig, 'module.exports = ' + JSON.stringify(result, null, '\t') + ';', 'utf8');
     });
 
     // 安装 QMUI Web 依赖包 
