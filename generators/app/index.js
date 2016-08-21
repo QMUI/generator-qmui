@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator'),
     chalk = require('chalk'),
     yosay = require('yosay'),
+    _     = require('lodash'),
     mkdirp = require('mkdirp'),
     fs = require('fs'),
     path = require('path'),
@@ -64,9 +65,19 @@ module.exports = yeoman.Base.extend({
 
   writing: function () {
     gutil.log(gutil.colors.green('QMUI Install: ') + '写入项目结构');
+
+    // 写入模板目录与主页
     mkdirp('UI_html');
     mkdirp('UI_html_result');
+    var readmeTmpl = _.template(this.fs.read(this.templatePath('index.html')));
+    this.fs.write(this.destinationPath('index.html'), readmeTmpl({
+      mainStyleFile: this.mainStyleFile
+    }));
+
+    // 写入样式目标目录
     mkdirp('public');
+    
+    // 写入样式源目录与 QMUI Web 源码
     mkdirp(devDir);
     gutil.log(gutil.colors.green('QMUI Install: ') + '安装最新版本的 QMUI Web');
     this.spawnCommandSync('git', ['clone', 'https://github.com/QMUI/qmui_web.git', qmuiDir]);

@@ -1,6 +1,6 @@
 {
   "name": "generator-qmui",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A Yeoman generator for QMUI Web",
   "homepage": "http://qmuiteam.com/web/",
   "author": {
@@ -21,6 +21,7 @@
   "dependencies": {
     "chalk": "^1.0.0",
     "gulp-util": "^3.0.7",
+    "lodash": "^4.15.0",
     "mkdirp": "^0.5.1",
     "yeoman-generator": "^0.24.1",
     "yosay": "^1.0.0"
