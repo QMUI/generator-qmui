@@ -99,10 +99,12 @@ module.exports = yeoman.Base.extend({
     // 写入模板目录与主页
     mkdirp('UI_html');
     mkdirp('UI_html_result');
-    var readmeTmpl = _.template(this.fs.read(this.templatePath('index.html')));
-    this.fs.write(this.destinationPath('index.html'), readmeTmpl({
-      mainStyleFile: this.mainStyleFile
+    var readmeTmpl = _.template(this.fs.read(this.templatePath('header.html')));
+    this.fs.write(this.destinationPath('UI_html/header.html'), readmeTmpl({
+      mainStyleFile: this.mainStyleFile.replace('scss', '')
     }));
+    this.fs.copy(this.templatePath('footer.html'), this.destinationPath('UI_html/footer.html'));
+    this.fs.copy(this.templatePath('index.html'), this.destinationPath('UI_html/index.html'));
 
     // 写入样式目标目录
     mkdirp('public');
@@ -110,7 +112,7 @@ module.exports = yeoman.Base.extend({
     // 写入样式源目录与 QMUI Web 源码
     mkdirp(devDir);
     gutil.log(gutil.colors.green('QMUI Install: ') + '安装最新版本的 QMUI Web');
-    this.spawnCommandSync('git', ['clone', 'https://github.com/QMUI/qmui_web.git', qmuiDir]);
+    this.spawnCommandSync('git', ['clone', 'https://github.com/QMUI/QMUI_Web.git', qmuiDir]);
     this.fs.copy(this.destinationPath(qmuiDir + '/config.js'), this.destinationPath(devDir + '/config.js'));
     this.fs.copy(this.destinationPath(qmuiDir + '/config.rb'), this.destinationPath(devDir + '/config.rb'));
   },
