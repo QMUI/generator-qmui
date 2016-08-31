@@ -28,6 +28,10 @@ module.exports = yeoman.Base.extend({
 
     this.mainStyleFile = 'main.scss';
 
+    this.browserSyncPort = 3030;
+
+    this.browserSyncShowLog = false;
+
     var prompts = [
         {
           type: 'input',
@@ -52,6 +56,29 @@ module.exports = yeoman.Base.extend({
           name: 'openIncludeFunction',
           message: '是否开启模板引擎（增强静态模板 include，条件判断，传参等能力）?'
         },
+        {
+          type: 'confirm',
+          name: 'openBrowserSync',
+          message: '是否开启 BrowserSync（修改后自动刷新浏览器）?'
+        },
+        {
+          when: function (response) {
+            return response.openBrowserSync;
+          },
+          type: 'input',
+          name: 'browserSyncPort',
+          message: 'BrowserSync 的端口号',
+          default: this.browserSyncPort
+        },
+        {
+          when: function (response) {
+            return response.openBrowserSync;
+          },
+          type: 'confirm',
+          name: 'browserSyncShowLog',
+          message: '是否显示 BrowserSync 的日志',
+          default: this.browserSyncShowLog 
+        }
     ];
 
     return this.prompt(prompts).then(function (props) {
@@ -59,6 +86,9 @@ module.exports = yeoman.Base.extend({
       this.prefix = props.prefix;
       this.mainStyleFile = props.mainStyleFile;
       this.openIncludeFunction = props.openIncludeFunction;
+      this.openBrowserSync = props.openBrowserSync;
+      this.browserSyncPort = props.browserSyncPort;
+      this.browserSyncShowLog = props.browserSyncShowLog;
 
     }.bind(this));
   },
@@ -94,22 +124,23 @@ module.exports = yeoman.Base.extend({
         projectName = this.projectName,
         prefix = this.prefix,
         mainStyleFile = this.mainStyleFile,
-        openIncludeFunction = this.openIncludeFunction;
+        openIncludeFunction = this.openIncludeFunction,
+        openBrowserSync = this.openBrowserSync,
+        browserSyncPort = this.browserSyncPort,
+        browserSyncShowLog = this.browserSyncShowLog;
 
     // 读取配置文件
-    fs.readFile(qmuiConfig, function(error, data) {
-      if (error) {
-        throw error;
-      }
-      var result = JSON.parse(data);
-      result.project = projectName;
-      result.prefix = prefix;
-      result.resultCssFileName= mainStyleFile;
-      result.openIncludeFunction = openIncludeFunction;
-      
-      // 把配置表中的值修改为用户输入后重新写入文件
-      fs.writeFileSync(qmuiConfig, 'module.exports = ' + JSON.stringify(result, null, '\t') + ';', 'utf8');
-    });
+    var result = require(qmuiConfig);
+    result.project = projectName;
+    result.prefix = prefix;
+    result.resultCssFileName= mainStyleFile;
+    result.openIncludeFunction = openIncludeFunction;
+    result.openBrowserSync = openBrowserSync;
+    result.browserSyncPort = browserSyncPort;
+    result.browserSyncShowLog = browserSyncShowLog;
+    
+    // 把配置表中的值修改为用户输入后重新写入文件
+    fs.writeFileSync(qmuiConfig, 'module.exports = ' + JSON.stringify(result, null, '\t') + ';', 'utf8');
 
     // 安装 QMUI Web 依赖包 
     var qmuiWebDir = process.cwd() + '/' + qmuiDir;
