@@ -1,0 +1,185 @@
+@@include('./_header.html', {
+  "title": "公共组件"
+})
+
+<style>
+.widget_stage {
+  padding: 50px;
+}
+.widget_stage_title {
+  margin-bottom: 15px;
+  font-size: 36px;
+}
+.widget_stage_desc {
+  margin-bottom: 50px;
+  color: gray;
+  font-size: 15px;
+}
+.widget_item {
+  margin-bottom: 40px;
+}
+.widget_item_title {
+  margin-bottom: 16px;
+  font-size: 22px;
+}
+.widget_item_cnt {
+  *zoom: 1;
+}
+.widget_item_cnt:after {
+  clear: both;
+  content: ".";
+  display: block;
+  line-height: 0;
+  font-size: 0;
+  visibility: hidden;
+  overflow: hidden;
+}
+.widget_item .qui_dialog,
+.widget_item .qui_dropdownMenu {
+  position: relative;
+  float: left;
+  margin: 10px 10px 10px 0;
+  top: 0 !important;
+  left: 0 !important;
+}
+.widget_item .<%- prefix %>_inputText {
+  margin-bottom: 20px;
+}
+.widget_item .qui_dialog {
+  z-index: 10;
+}
+</style>
+
+<div class="widget_stage">
+
+  <div class="widget_stage_title"><%- projectName %> 项目通用组件</div>
+
+  <div class="widget_stage_desc">项目中应当抽取公共的部分以及较为复杂的部分作为组件，方便复用。其中按钮，对话框，遮罩层，下拉菜单，选项卡和文本输入6个组件因为每个项目中都基本会使用到，因此已经由框架预先实现，可以通过修改 UI_dev/project/_var.scss 以及 UI_dev/project/widget 中对应的文件来修改组件的样式，已达到项目的设计要求。</div>
+
+  <div class="widget_item">
+    <div class="widget_item_title">按钮 <%- prefix %>_btn</div>
+    <div class="widget_item_cnt">
+      <a class="qui_btn <%- prefix %>_btn" href="javascript:;">按钮</a>
+      <a class="qui_btn <%- prefix %>_btn <%- prefix %>_btn_Ghost" href="javascript:;">按钮</a>
+      <a class="qui_btn <%- prefix %>_btn" href="javascript:;" disabled>按钮禁用</a>
+      <a class="qui_btn <%- prefix %>_btn <%- prefix %>_btn_Ghost" href="javascript:;" disabled>按钮禁用</a>
+    </div>
+  </div>
+
+  <div class="widget_item">
+    <div class="widget_item_title">对话框 <%- prefix %>_dialog</div>
+    <div class="widget_item_cnt">
+
+      <div class="qui_dialog <%- prefix %>_dialog">
+        <a class="qui_dialog_close <%- prefix %>_dialog_close" href="javascript:;">X</a>
+        <div class="qui_dialog_head <%- prefix %>_dialog_head">
+          <div class="qui_dialog_title <%- prefix %>_dialog_title">对话框标题</div>
+        </div>
+        <div class="qui_dialog_body <%- prefix %>_dialog_body">
+          这里是对话框的主体内容。<br />
+          通常一个对话框由头部、主体内容和底部栏三部分组成。
+        </div>
+        <div class="qui_dialog_foot <%- prefix %>_dialog_foot">
+          <a class="qui_btn <%- prefix %>_btn" href="javascript:;">确认</a><a class="qui_btn <%- prefix %>_btn <%- prefix %>_btn_Ghost" href="javascript:;">取消</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="widget_item">
+    <div class="widget_item_title">遮罩层 <%- prefix %>_mask</div>
+    <div class="widget_item_cnt">
+      <a id="qui_showMask" href="javascript:;">查看效果</a>
+    </div>
+  </div>
+
+  <!-- 遮罩层效果演示 -->
+  <div id="qui_maskWrap" style="display: none;">
+		<div class="qui_mask <%- prefix %>_mask"></div>
+		<div class="qui_dialog <%- prefix %>_dialog widget_dialogInMask">
+			<div class="qui_dialog_head <%- prefix %>_dialog_head">
+				<div class="qui_dialog_title <%- prefix %>_dialog_title">对话框标题</div>
+				<a class="qui_dialog_close <%- prefix %>_dialog_close <%- prefix %>_icon <%- prefix %>_icon_CloseDialog" href="javascript:;">X</a>
+			</div>
+			<div class="qui_dialog_body <%- prefix %>_dialog_body">点击任意处关闭</div>
+			<div class="qui_dialog_foot <%- prefix %>_dialog_foot">
+				<a class="qui_btn <%- prefix %>_btn <%- prefix %>_btn_Blue" href="javascript:;">确认</a>
+				<a class="qui_btn <%- prefix %>_btn" href="javascript:;">取消</a>
+			</div>
+		</div>
+	</div>
+
+  <div class="widget_item">
+    <div class="widget_item_title">下拉菜单 <%- prefix %>_dropdownmenu</div>
+    <div class="widget_item_cnt">
+
+      <div class="qui_dropdownMenu <%- prefix %>_dropdownMenu">
+        <ul>
+          <li class="qui_dropdownMenu_item <%- prefix %>_dropdownMenu_item">
+          <a href="javascript:;" class="qui_dropdownMenu_itemLink <%- prefix %>_dropdownMenu_itemLink">菜单选项一</a>
+          </li>
+          <li class="qui_dropdownMenu_item <%- prefix %>_dropdownMenu_item">
+          <a href="javascript:;" class="qui_dropdownMenu_itemLink <%- prefix %>_dropdownMenu_itemLink">菜单选项二</a>
+          </li>
+          <li class="qui_dropdownMenu_item <%- prefix %>_dropdownMenu_item">
+          <a href="javascript:;" class="qui_dropdownMenu_itemLink <%- prefix %>_dropdownMenu_itemLink">菜单选项三</a>
+          </li>
+          <li class="qui_dropdownMenu_item <%- prefix %>_dropdownMenu_item">
+          <a href="javascript:;" class="qui_dropdownMenu_itemLink <%- prefix %>_dropdownMenu_itemLink">菜单选项四</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="widget_item">
+    <div class="widget_item_title">选项卡 <%- prefix %>_tab</div>
+    <div class="widget_item_cnt">
+
+      <div class="qui_tab <%- prefix %>_tab">
+        <div class="qui_tab_title <%- prefix %>_tab_title">
+          <ul class="qui_tabNav <%- prefix %>_tabNav">
+            <li class="qui_tabNav_item <%- prefix %>_tabNav_item <%- prefix %>_tabNav_item_Curr">
+              <a href="javascript:;" class="qui_tabNav_itemLink <%- prefix %>_tabNav_itemLink">选项卡一</a>
+            </li>
+            <li class="qui_tabNav_item <%- prefix %>_tabNav_item">
+              <a href="javascript:;" class="qui_tabNav_itemLink <%- prefix %>_tabNav_itemLink">选项卡二</a>
+            </li>
+            <li class="qui_tabNav_item <%- prefix %>_tabNav_item">
+              <a href="javascript:;" class="qui_tabNav_itemLink <%- prefix %>_tabNav_itemLink">选项卡三</a>
+            </li>
+          </ul>
+        </div>
+        <div class="qui_tab_cnt <%- prefix %>_tab_cnt">这里是选项卡的内容</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="widget_item">
+    <div class="widget_item_title">文本输入 <%- prefix %>_inputText/<%- prefix %>_textarea</div>
+    <div class="widget_item_cnt">
+      <input type="text" class="qui_inputText <%- prefix %>_inputText" placeholder="普通文本框" />
+      <textarea class="qui_textarea <%- prefix %>_textarea" placeholder="长文本框"></textarea>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // 公共组件遮罩层效果展示
+  var showMask = document.getElementById('qui_showMask'),
+  maskWrap = document.getElementById('qui_maskWrap');
+  if(showMask && maskWrap) {
+    showMask.onclick = function(){
+      maskWrap.style.display = 'block';
+    }
+    maskWrap.onclick = function(){
+      maskWrap.style.display = 'none';
+    }
+  }
+</script>
+
+@@include('./_footer.html')

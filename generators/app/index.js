@@ -99,12 +99,20 @@ module.exports = yeoman.Base.extend({
     // 写入模板目录与主页
     mkdirp('UI_html');
     mkdirp('UI_html_result');
-    var readmeTmpl = _.template(this.fs.read(this.templatePath('header.html')));
-    this.fs.write(this.destinationPath('UI_html/header.html'), readmeTmpl({
+    this.fs.copy(this.templatePath('_footer.html'), this.destinationPath('UI_html/_footer.html'));
+    var readmeHeaderTmpl = _.template(this.fs.read(this.templatePath('_header.html')));
+    this.fs.write(this.destinationPath('UI_html/_header.html'), readmeHeaderTmpl({
       mainStyleFile: this.mainStyleFile.replace('scss', '')
     }));
-    this.fs.copy(this.templatePath('footer.html'), this.destinationPath('UI_html/footer.html'));
-    this.fs.copy(this.templatePath('index.html'), this.destinationPath('UI_html/index.html'));
+    var readmeWidgetTmpl = _.template(this.fs.read(this.templatePath('widget.html')));
+    this.fs.write(this.destinationPath('UI_html/widget.html'), readmeWidgetTmpl({
+      projectName: this.projectName,
+      prefix: this.prefix
+    }));
+    var readmeIndexTmpl = _.template(this.fs.read(this.templatePath('index.html')));
+    this.fs.write(this.destinationPath('UI_html/index.html'), readmeIndexTmpl({
+      projectName: this.projectName
+    }));
 
     // 写入样式目标目录
     mkdirp('public');

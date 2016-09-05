@@ -1,7 +1,25 @@
-@@include('./header.html', {
+@@include('./_header.html', {
   "title": "主页"
 })
 
-<div>It's Work!</div>
+<style>
+.index_stage {
+  padding: 50px;
+}
+.index_stage_title {
+  margin-bottom: 15px;
+  font-size: 36px;
+}
+.index_stage_desc {
+  margin-bottom: 50px;
+  color: gray;
+  font-size: 15px;
+}
+</style>
+<div class="index_stage">
+  <div class="index_stage_title"><%- projectName %> 项目部署完成</div>
 
-@@include('./footer.html')
+  <div class="index_stage_desc">你可以开始编写代码，或者浏览预先写入的<a href="./widget.html">基础组件</a>。</div>
+</div>
+
+@@include('./_footer.html')
