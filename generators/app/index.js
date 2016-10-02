@@ -102,6 +102,7 @@ module.exports = yeoman.Base.extend({
     this.fs.copy(this.templatePath('_footer.html'), this.destinationPath('UI_html/_footer.html'));
     var readmeHeaderTmpl = _.template(this.fs.read(this.templatePath('_header.html')));
     this.fs.write(this.destinationPath('UI_html/_header.html'), readmeHeaderTmpl({
+      projectName: this.projectName,
       mainStyleFile: this.mainStyleFile.replace('scss', '')
     }));
     var readmeWidgetTmpl = _.template(this.fs.read(this.templatePath('widget.html')));
