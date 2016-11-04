@@ -1,0 +1,8 @@
+Description:
+  Creates a new QMUI formating Scss file
+
+Example:
+  yo qmui:scss Name
+
+This will create:
+  Name.scss
