@@ -1,8 +1,8 @@
 Description:
-  Creates a new QMUI formating Scss file
+  Creates a HTML file containing the basic code. The —include option will output template that uses QMUI Include Syntax rather than native HTML.
 
 Example:
-  yo qmui:scss Name
+  yo qmui:html fileName [--include]
 
 This will create:
-  Name.scss
+  fileName.html
