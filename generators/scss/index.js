@@ -40,7 +40,7 @@ module.exports = yeoman.Base.extend({
     var readmeHeaderTmpl = _.template(this.fs.read(this.templatePath('template.scss')));
     fs.writeFileSync(this.destinationPath(this.fileName + '.scss'), readmeHeaderTmpl({
       fileName: this.fileName,
-      author: path.basename(os.homedir()),
+      author: _.upperFirst(path.basename(os.homedir())), // 首字母大写
       createDate: formattingDate
     }));
 

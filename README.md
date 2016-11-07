@@ -2,8 +2,8 @@
 > A Yeoman generator for QMUI Web
 
 [![Dependency Status][daviddm-image]][daviddm-url]
-[![QMUI Team Name](https://img.shields.io/badge/Team-QMUI-brightgreen.svg?style=flat)](https://github.com/QMUI "QMUI Team") 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT "Feel free to contribute.") 
+[![QMUI Team Name](https://img.shields.io/badge/Team-QMUI-brightgreen.svg?style=flat)](https://github.com/QMUI "QMUI Team")
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT "Feel free to contribute.")
 
 ## Installation
 
@@ -23,6 +23,119 @@ yo qmui
 ## Preview
 
 <img src="https://raw.githubusercontent.com/QMUI/qmuidemo_web/master/public/style/images/independent/Generator.gif" width="628" height="442" alt="效果预览" />
+
+## Generators
+
+Available generators:
+
+* [qmui](#app) (aka [qmui:app](#app))
+* [qmui:html](#html)
+* [qmui:scss](#scss)
+* [qmui:css](#css)
+
+### App
+
+Sets up a new QMUI Web project on your target directory, generating all the directories and files you need to get started, and guide you to configure the project.
+
+Example:
+
+```bash
+yo qmui
+```
+
+
+### Html
+
+Generates a HTML file containing the basic code.
+
+Example:
+
+```bash
+yo qmui:html fileName
+```
+
+Produces `fileName.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="zh-cmn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <meta name="renderer" content="webkit" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <title>Page Title</title>
+</head>
+<body>
+
+</body>
+</html>
+```
+
+For generator that outputs HTML template, the —include option will output template that uses QMUI Include Syntax rather than native HTML.
+
+Example:
+
+```bash
+yo qmui:html fileName --include
+```
+
+Produces `fileName.html`
+
+```html
+@@include('./_header.html', {
+  "title": "Page Title"
+})
+
+@@include('./_footer.html')
+```
+
+### Scss
+
+Generates a scss file that conforms to the QMUI format.
+
+Example:
+
+```bash
+yo qmui:scss fileName
+```
+
+Produces `fileName.scss`:
+
+```scss
+@charset "UTF-8";
+/**
+ * fileName.scss
+ * @author Your OS Username
+ * @date Today
+ *
+ */
+
+
+```
+
+### Css
+
+Generates a style file that conforms to the QMUI format.
+
+Example:
+
+```bash
+yo qmui:css fileName
+```
+
+Produces `fileName.css`:
+
+```css
+/**
+ * fileName.css
+ * @author Your OS Username
+ * @date Today
+ *
+ */
+
+
+```
 
 ## License
 
