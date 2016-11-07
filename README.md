@@ -72,7 +72,7 @@ Produces `fileName.html`:
 </html>
 ```
 
-For generator that outputs HTML template, the —include option will output template that uses QMUI Include Syntax rather than native HTML.
+For generator that outputs HTML template, the `—-include` option will output template that uses QMUI Include Syntax rather than native HTML.
 
 Example:
 
