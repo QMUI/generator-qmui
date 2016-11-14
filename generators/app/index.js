@@ -77,7 +77,7 @@ module.exports = yeoman.Base.extend({
           type: 'confirm',
           name: 'browserSyncShowLog',
           message: '是否显示 BrowserSync 的日志',
-          default: this.browserSyncShowLog 
+          default: this.browserSyncShowLog
         }
     ];
 
@@ -87,8 +87,10 @@ module.exports = yeoman.Base.extend({
       this.mainStyleFile = props.mainStyleFile;
       this.openIncludeFunction = props.openIncludeFunction;
       this.openBrowserSync = props.openBrowserSync;
-      this.browserSyncPort = props.browserSyncPort;
-      this.browserSyncShowLog = props.browserSyncShowLog;
+      if (this.openBrowserSync) {
+        this.browserSyncPort = props.browserSyncPort;
+        this.browserSyncShowLog = props.browserSyncShowLog;
+      }
 
     }.bind(this));
   },
@@ -117,7 +119,7 @@ module.exports = yeoman.Base.extend({
 
     // 写入样式目标目录
     mkdirp('public');
-    
+
     // 写入样式源目录与 QMUI Web 源码
     mkdirp(devDir);
     gutil.log(gutil.colors.green('QMUI Install: ') + '安装最新版本的 QMUI Web');
@@ -131,7 +133,7 @@ module.exports = yeoman.Base.extend({
     this.qmuiConfig = this.destinationPath(devDir + '/config.js');
 
     // readFile 内 this 被改变，这里需要先把配置数据复制一份
-    var qmuiConfig = this.qmuiConfig, 
+    var qmuiConfig = this.qmuiConfig,
         projectName = this.projectName,
         prefix = this.prefix,
         mainStyleFile = this.mainStyleFile,
@@ -146,14 +148,17 @@ module.exports = yeoman.Base.extend({
     result.prefix = prefix;
     result.resultCssFileName= mainStyleFile;
     result.openIncludeFunction = openIncludeFunction;
-    result.openBrowserSync = openBrowserSync;
     result.browserSyncPort = browserSyncPort;
     result.browserSyncShowLog = browserSyncShowLog;
-    
+
+    if (!openBrowserSync) {
+      result.browserSyncMod = 'close';
+    }
+
     // 把配置表中的值修改为用户输入后重新写入文件
     fs.writeFileSync(qmuiConfig, 'module.exports = ' + JSON.stringify(result, null, '\t') + ';', 'utf8');
 
-    // 安装 QMUI Web 依赖包 
+    // 安装 QMUI Web 依赖包
     var qmuiWebDir = process.cwd() + '/' + qmuiDir;
     process.chdir(qmuiWebDir);
 
