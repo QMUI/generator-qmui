@@ -1,8 +1,8 @@
 'use strict';
 var yeoman = require('yeoman-generator'),
-    _      = require('lodash'),
-    fs     = require('fs'),
-    gutil  = require('gulp-util');
+    _ = require('lodash'),
+    fs = require('fs'),
+    gutil = require('gulp-util');
 
 module.exports = yeoman.Base.extend({
 
@@ -12,7 +12,7 @@ module.exports = yeoman.Base.extend({
     // fileName 为需要创建的 HTML 文件名
     this.argument('fileName', {
       type: String,
-      desc: "HTML file name",
+      desc: 'HTML file name',
       required: true
     });
 
@@ -43,15 +43,15 @@ module.exports = yeoman.Base.extend({
   writing: function () {
 
     // 生成 HTML 文件
-    var readmeHeaderTmpl;
+    var readmeHeaderTmpl = null;
     if (this.options.include) {
-      readmeHeaderTmpl  = _.template(this.fs.read(this.templatePath('include.html')));
+      readmeHeaderTmpl = _.template(this.fs.read(this.templatePath('include.html')));
     } else {
-      readmeHeaderTmpl  = _.template(this.fs.read(this.templatePath('template.html')));
+      readmeHeaderTmpl = _.template(this.fs.read(this.templatePath('template.html')));
     }
 
     fs.writeFileSync(this.destinationPath(this.fileName + '.html'), readmeHeaderTmpl({
-      pageTitle : this.pageTitle
+      pageTitle: this.pageTitle
     }));
 
     gutil.log(gutil.colors.green('QMUI Generator: ') + '创建新 HTML 文件 ' + this.fileName + '.html');

@@ -2,7 +2,7 @@
 var yeoman = require('yeoman-generator'),
     chalk = require('chalk'),
     yosay = require('yosay'),
-    _     = require('lodash'),
+    _ = require('lodash'),
     mkdirp = require('mkdirp'),
     fs = require('fs'),
     path = require('path'),

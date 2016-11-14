@@ -1,10 +1,10 @@
 'use strict';
 var yeoman = require('yeoman-generator'),
-    _      = require('lodash'),
-    fs     = require('fs'),
-    os     = require('os'),
-    path   = require('path'),
-    gutil  = require('gulp-util');
+    _ = require('lodash'),
+    fs = require('fs'),
+    os = require('os'),
+    path = require('path'),
+    gutil = require('gulp-util');
 
 module.exports = yeoman.Base.extend({
 
@@ -14,7 +14,7 @@ module.exports = yeoman.Base.extend({
     // fileName 为需要创建的 Css 文件名
     this.argument('fileName', {
       type: String,
-      desc: "Style file name",
+      desc: 'Style file name',
       required: true
     });
   },
@@ -23,10 +23,12 @@ module.exports = yeoman.Base.extend({
 
     // 检查时间格式（自动补0）
     var checkDateFormat = function(date) {
-      if (date < 10) {
-        date = '0' + date;
+      var result = date;
+      if (result < 10) {
+        result = '0' + result;
       }
-      return date;
+
+      return result;
     };
 
     // 获取当前时间
@@ -40,7 +42,7 @@ module.exports = yeoman.Base.extend({
     var readmeHeaderTmpl = _.template(this.fs.read(this.templatePath('template.css')));
     fs.writeFileSync(this.destinationPath(this.fileName + '.css'), readmeHeaderTmpl({
       fileName: this.fileName,
-      author: _.upperFirst(path.basename(os.homedir())), // 首字母大写
+      author: _.upperFirst(path.basename(os.homedir())),
       createDate: formattingDate
     }));
 
