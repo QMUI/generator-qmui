@@ -123,7 +123,7 @@ module.exports = yeoman.Base.extend({
     // 写入样式源目录与 QMUI Web 源码
     mkdirp(devDir);
     gutil.log(gutil.colors.green('QMUI Install: ') + '安装最新版本的 QMUI Web');
-    this.spawnCommandSync('git', ['clone', 'https://github.com/QMUI/QMUI_Web.git', qmuiDir]);
+    this.spawnCommandSync('git', ['clone', 'https://github.com/Tencent/QMUI_Web.git', qmuiDir]);
     this.fs.copy(this.destinationPath(qmuiDir + '/config.js'), this.destinationPath(devDir + '/config.js'));
   },
 
