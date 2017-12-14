@@ -123,7 +123,7 @@ module.exports = yeoman.Base.extend({
     // 写入样式源目录与 QMUI Web 源码
     mkdirp(devDir);
     gutil.log(gutil.colors.green('QMUI Install: ') + '安装最新版本的 QMUI Web');
-    this.spawnCommandSync('git', ['clone', 'https://github.com/kayo5994/QMUI_Web.git', qmuiDir]);
+    this.spawnCommandSync('git', ['clone', 'https://github.com/Tencent/QMUI_Web.git', qmuiDir]);
     this.fs.copy(this.destinationPath(qmuiDir + '/config.js'), this.destinationPath(devDir + '/config.js'));
   },
 
@@ -146,12 +146,12 @@ module.exports = yeoman.Base.extend({
     result.project = projectName;
     result.prefix = prefix;
     result.resultCssFileName= mainStyleFile;
-    result.openIncludeFunction = openIncludeFunction;
-    result.browserSyncPort = browserSyncPort;
-    result.browserSyncShowLog = browserSyncShowLog;
+    result.template.openIncludeFunction = openIncludeFunction;
+    result.browserSync.browserSyncPort = browserSyncPort;
+    result.browserSync.browserSyncShowLog = browserSyncShowLog;
 
     if (!openBrowserSync) {
-      result.browserSyncMod = 'close';
+      result.browserSync.browserSyncMod = 'close';
     }
 
     // 把配置表中的值修改为用户输入后重新写入文件
