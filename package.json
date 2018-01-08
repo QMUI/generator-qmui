@@ -19,25 +19,26 @@
     "yeoman-generator"
   ],
   "dependencies": {
+    "ansi-colors": "^1.0.1",
     "chalk": "^2.3.0",
-    "gulp-util": "^3.0.8",
+    "fancy-log": "^1.3.2",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
     "yeoman-generator": "^0.24.1",
     "yosay": "^2.0.1"
   },
   "devDependencies": {
-    "eslint": "^4.13.1",
+    "eslint": "^4.15.0",
     "eslint-config-xo-space": "^0.17.0",
     "gulp": "^3.9.1",
     "gulp-coveralls": "^0.1.4",
-    "gulp-eslint": "^4.0.0",
+    "gulp-eslint": "^4.0.1",
     "gulp-exclude-gitignore": "^1.2.0",
-    "gulp-istanbul": "^1.1.2",
+    "gulp-istanbul": "^1.1.3",
     "gulp-line-ending-corrector": "^1.0.2",
-    "gulp-mocha": "^4.3.1",
+    "gulp-mocha": "^5.0.0",
     "gulp-nsp": "^2.4.2",
-    "gulp-plumber": "^1.1.0",
+    "gulp-plumber": "^1.2.0",
     "yeoman-assert": "^3.1.0",
     "yeoman-test": "^1.7.0"
   },
