@@ -32,6 +32,7 @@ Available generators:
 * [qmui:html](#html)
 * [qmui:scss](#scss)
 * [qmui:css](#css)
+* [qmui:task](#custom-task)
 
 ### App
 
@@ -135,6 +136,39 @@ Produces `fileName.css`:
  */
 
 
+```
+
+### Custom Task
+
+Generates a JavaScript file that fits in the QMUI workflow in order to implement custom tasks.
+
+Example:
+
+```bash
+yo qmui:task fileName
+```
+
+Produces `fileName.js`:
+
+```js
+// Task Name
+module.exports = function (gulp, common) {
+
+    var taskName = 'Task Name';
+
+    gulp.task(taskName, function (done) {
+
+        // Custom task logic code
+        common.util.log('execute succeed');
+
+        done();
+    });
+
+    // Task Description (For gulp list)
+    common.tasks[taskName] = {
+        description: 'Custom Task'
+    };
+};
 ```
 
 ## License
