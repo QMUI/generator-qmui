@@ -125,12 +125,12 @@ module.exports = yeoman.Base.extend({
         mkdirp(devDir);
         log(colors.green('QMUI Install: ') + '安装最新版本的 QMUI Web');
         this.spawnCommandSync('git', ['clone', 'https://github.com/kayo5994/QMUI_Web.git', qmuiDir]);
-        this.fs.copy(this.destinationPath(qmuiDir + '/config.js'), this.destinationPath(devDir + '/config.js'));
+        this.fs.copy(this.destinationPath(qmuiDir + '/qmui.config.js'), this.destinationPath(devDir + '/qmui.config.js'));
     },
 
     install: function () {
         // QMUI 配置表
-        this.qmuiConfig = this.destinationPath(devDir + '/config.js');
+        this.qmuiConfig = this.destinationPath(devDir + '/qmui.config.js');
 
         // readFile 内 this 被改变，这里需要先把配置数据复制一份
         var qmuiConfig = this.qmuiConfig,
