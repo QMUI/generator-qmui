@@ -1,0 +1,8 @@
+Description:
+  Create a JavaScript file that fits in the QMUI workflow in order to implement custom tasks.
+
+Example:
+  yo qmui:task fileName
+
+This will create:
+  fileName.js
