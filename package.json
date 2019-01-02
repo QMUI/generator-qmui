@@ -49,7 +49,6 @@
     },
     "repository": "QMUI/generator-qmui",
     "scripts": {
-        "prepublish": "gulp prepublish",
         "test": "gulp"
     },
     "license": "MIT"
