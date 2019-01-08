@@ -1,18 +1,16 @@
 // <%- taskName %>
-module.exports = function (gulp, common) {
+module.exports = function (gulp, mix) {
 
-    var taskName = '<%- taskName %>';
+    const taskName = '<%- taskName %>';
 
     gulp.task(taskName, function (done) {
 
         // Custom task logic code
-        common.util.log('<%- taskName %> execute succeed');
+        mix.util.log('<%- taskName %> execute succeed');
 
         done();
     });
 
     // Task Description (For gulp list)
-    common.tasks[taskName] = {
-        description: 'Custom Task <%- taskName %>'
-    };
+    mix.addTaskDescription(taskName, 'Custom Task <%- taskName %>');
 };
