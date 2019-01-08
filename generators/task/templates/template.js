@@ -1,9 +1,9 @@
 // <%- taskName %>
-module.exports = function (gulp, mix) {
+module.exports = (gulp, mix) => {
 
     const taskName = '<%- taskName %>';
 
-    gulp.task(taskName, function (done) {
+    gulp.task(taskName, done => {
 
         // Custom task logic code
         mix.util.log('<%- taskName %> execute succeed');
